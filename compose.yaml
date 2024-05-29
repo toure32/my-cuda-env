@@ -7,8 +7,8 @@ networks:
 
 services:
 
-  datacollector:
-    container_name: nsai-datacollector
+  cuda-dev:
+    container_name: dev-env
     build:
       # context: ${NSAI_ROOT}
       dockerfile: Dockerfile
