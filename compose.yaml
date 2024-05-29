@@ -10,7 +10,7 @@ services:
   cuda-dev:
     container_name: dev-env
     build:
-      # context: ${NSAI_ROOT}
+      context: ./
       dockerfile: Dockerfile
     deploy:
       resources:
