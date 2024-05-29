@@ -30,6 +30,8 @@ services:
       - cuda-network
     ports:
       - 8088:80
+    volumes:
+      - /root/dev-home:/home
 
   # webui:
   #   container_name: nsai-webui
