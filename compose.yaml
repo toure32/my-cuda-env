@@ -1,0 +1,53 @@
+version: '3.8'
+x-name: cuda
+
+networks:
+  cuda-network: {}
+
+
+services:
+
+  datacollector:
+    container_name: nsai-datacollector
+    build:
+      # context: ${NSAI_ROOT}
+      dockerfile: Dockerfile
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - LD_LIBRARY_PATH=/usr/local/cuda/lib64
+      - CUDA_HOME=/usr/local/cuda
+      - TF_ENABLE_ONEDNN_OPTS=0
+      - JUPYTER_TOKEN
+
+    networks:
+      - cuda-network
+    ports:
+      - 8088:80
+
+  # webui:
+  #   container_name: nsai-webui
+  #   build:
+  #     context: ${NSAI_ROOT}
+  #     dockerfile: ${NSAI_ROOT}/docker/webui/Dockerfile
+  #     args:
+  #       # NODE_VERSION: ${WEBUI_NODE_VERSION}
+  #       # WEBUI_PORT: ${WEBUI_PORT}
+  #       DATACOLLECTOR_SERVER: ${DATACOLLECTOR_SERVER}
+  #       DATACOLLECTOR_PORT: ${FLASK_RUN_PORT}
+  #   environment:
+  #     WEBUI_PORT: ${WEBUI_HTTP_PORT}
+  #   depends_on:
+  #     datacollector:
+  #       condition: service_healthy
+  #   networks:
+  #     - network-sherif-ai
+  #   ports:
+  #     - ${WEBUI_HTTP_PORT}:80
+  #     - ${WEBUI_HTTPS_PORT}:443
