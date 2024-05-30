@@ -1,5 +1,5 @@
 # Utiliser la dernière version de l'image CUDA
-FROM aperture147/tensorflow-non-avx
+FROM aperture147/tensorflow-non-avx:bionic-slim
 # tensorflow/tensorflow:latest-gpu
 # nvidia/cuda:12.3.1-runtime-ubuntu22.04
 
