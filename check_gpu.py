@@ -31,3 +31,6 @@ if cuda_available:
         print(f"GPU {i}: {torch.cuda.get_device_name(i)}")
 else:
     print("No GPU detected")
+
+# python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+# python -c "import torch; print('CUDA available:', torch.cuda.is_available())"
